@@ -7,7 +7,7 @@ const PORT = 3002;
 
 const app = express();
 
-const url = "mongodb://localhost:27017";
+const url = "mongodb://localhost:27017/shop";
 const connection = mongoose.createConnection(url, { maxPoolSize: 19 });
 
 mongoose
