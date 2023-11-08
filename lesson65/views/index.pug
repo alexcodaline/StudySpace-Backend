@@ -1,0 +1,56 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel='stylesheet', href='/style.css')
+    title Users
+  body
+    h1 Admin page
+    h2 Add users
+    form(action="/add" class="add" method="POST")
+      label(for="title") Name:
+      input(id="title" name="name" placeholder="Enter name")
+      label(for="description") Status:
+      input(id="description" name="status" placeholder="Enter status")
+      label(for="price") Age:
+      input(type="number", min="1", id="price" name="age" placeholder="Enter age")
+      label(for="img") Link for avatar:
+      input(id="img" name="link" placeholder="Enter image link")
+      button(type="submit") Add user
+    h2(class="corses-list") All users
+  #users
+    if users.length
+      each user in users
+        .course
+          .img
+            img(src=`${user.link}`, alt="")
+          .title #{user.name}
+          .price #{user.status}
+          .price #{user.age}
+          .course-view-btn
+            a(href=`/user/${user._id}`) 
+              button Show
+          .course-btn
+            a(href=`/edit/${user._id}`)
+              button Edit
+            button(type="button" onclick=`removeUser('${user._id}')`) Delete
+    else
+      h3 Empty
+
+script.
+  function removeUser(userId) {
+    fetch(`/remove/${userId}`, { method: 'DELETE' })
+      .then(response => {
+        if (response.ok) {
+          window.location.reload();
+        } else {
+          throw new Error('Network response was not ok');
+        }
+      }).catch(error => {
+      console.error('There was an error!', error);
+    });
+  }
+
+
