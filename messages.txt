@@ -1,1 +1,0 @@
-[{"name":"stas","msg":"hello mike"},{"name":"stas","msg":"hello nikola"},{"name":"stas","msg":"text message"}]
